@@ -1,5 +1,140 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import teamData from "./TeamData";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+// Separate component for the scrollable row
+function TeamScrollRow({ teamMembers }) {
+  const scrollContainerRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const scroll = (direction) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const scrollAmount = 400; // Adjust scroll distance
+    const newScrollLeft =
+      direction === "left"
+        ? container.scrollLeft - scrollAmount
+        : container.scrollLeft + scrollAmount;
+
+    container.scrollTo({
+      left: newScrollLeft,
+      behavior: "smooth",
+    });
+  };
+
+  const handleScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    setShowLeftArrow(container.scrollLeft > 0);
+    setShowRightArrow(
+      container.scrollLeft < container.scrollWidth - container.clientWidth - 10
+    );
+  };
+
+  return (
+    <div className="relative group/row">
+      {/* Left Arrow */}
+      {showLeftArrow && (
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/95 hover:bg-red-600 text-gray-800 hover:text-white p-3 rounded-full shadow-xl transition-all duration-300 opacity-0 group-hover/row:opacity-100 hover:scale-110"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft size={24} />
+        </button>
+      )}
+
+      {/* Right Arrow */}
+      {showRightArrow && (
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/95 hover:bg-red-600 text-gray-800 hover:text-white p-3 rounded-full shadow-xl transition-all duration-300 opacity-0 group-hover/row:opacity-100 hover:scale-110"
+          aria-label="Scroll right"
+        >
+          <ChevronRight size={24} />
+        </button>
+      )}
+
+      {/* Scrollable Container */}
+      <div
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+        className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth px-4"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
+        {teamMembers.map((member, index) => (
+          <div
+            key={member.id}
+            className="flex-shrink-0 w-[280px] sm:w-[320px] snap-start group/card animate-fadeInScale"
+            style={{ animationDelay: `${index * 100}ms` }}
+          >
+            <div className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-red-400 transform hover:scale-105 hover:-translate-y-2 h-full">
+              {/* Image Container */}
+              <div className="relative h-72 overflow-hidden bg-gradient-to-br from-red-50 to-blue-50">
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="w-full h-full object-cover transition-all duration-500 group-hover/card:scale-110"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                    e.target.parentElement.innerHTML = `
+                      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-100 to-blue-100">
+                        <span class="text-5xl font-bold text-red-600">
+                          ${member.name.split(" ").map((n) => n[0]).join("")}
+                        </span>
+                      </div>
+                    `;
+                  }}
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+
+                {/* Role Badge - appears on hover */}
+                <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg opacity-0 group-hover/card:opacity-100 transition-all duration-500 transform translate-y-2 group-hover/card:translate-y-0">
+                  {member.role}
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-5">
+                <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover/card:text-red-600 transition-colors duration-300">
+                  {member.name}
+                </h3>
+                
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
+                  <p className="text-sm font-medium text-gray-500">
+                    {member.role}
+                  </p>
+                </div>
+
+                <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                  {member.description}
+                </p>
+
+                {/* Bottom gradient line */}
+                <div className="mt-4 h-1 bg-gradient-to-r from-red-600 to-transparent rounded-full transform scale-x-0 group-hover/card:scale-x-100 transition-transform duration-500 origin-left"></div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Scroll indicator hint */}
+      <div className="text-center mt-6 text-sm text-gray-400">
+        ← Scroll to explore our team →
+      </div>
+    </div>
+  );
+}
 
 export default function TeamSection() {
   const leaders = teamData.filter((member) => member.category === "leadership");
@@ -93,9 +228,9 @@ export default function TeamSection() {
         </div>
       </div>
 
-      {/* ================= DEVELOPMENT TEAM ================= */}
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+      {/* ================= DEVELOPMENT TEAM (Netflix-style Scrollable Row) ================= */}
+      <div className="max-w-[1400px] mx-auto">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Development & Creative Team
           </h2>
@@ -106,66 +241,7 @@ export default function TeamSection() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-          {teamMembers.map((member, index) => (
-            <div
-              key={member.id}
-              className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-red-300 transform hover:-translate-y-2 animate-fadeInScale"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Image Container */}
-              <div className="relative h-64 overflow-hidden bg-gray-200">
-                <img
-                  src={member.img}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
-                  loading="lazy"
-                />
-                {/* Gradient Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-red-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                {/* Role Badge */}
-                <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg transform translate-y-20 group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="text-xs font-bold text-red-600">
-                    {member.role}
-                  </span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-red-600 transition-colors duration-300">
-                  {member.name}
-                </h3>
-                <p className="text-sm font-medium text-gray-500 mb-4">
-                  {member.role}
-                </p>
-
-                <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
-                  {member.description}
-                </p>
-
-                {/* Animated Arrow */}
-                <div className="mt-4 flex items-center text-red-600 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-2">
-                  <span>View Details</span>
-                  <svg
-                    className="w-4 h-4 ml-2 animate-bounceRight"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <TeamScrollRow teamMembers={teamMembers} />
       </div>
 
       {/* Custom Animations Styles */}
@@ -203,36 +279,6 @@ export default function TeamSection() {
           }
         }
 
-        @keyframes bounceRight {
-          0%,
-          100% {
-            transform: translateX(0);
-          }
-          50% {
-            transform: translateX(5px);
-          }
-        }
-
-        @keyframes float {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          50% {
-            transform: translate(30px, -30px) scale(1.1);
-          }
-        }
-
-        @keyframes floatDelay {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          50% {
-            transform: translate(-30px, 30px) scale(1.1);
-          }
-        }
-
         .animate-fadeInUp {
           animation: fadeInUp 0.8s ease-out forwards;
         }
@@ -247,16 +293,14 @@ export default function TeamSection() {
           animation: fadeInScale 0.6s ease-out forwards;
         }
 
-        .animate-bounceRight {
-          animation: bounceRight 1s ease-in-out infinite;
+        /* Hide scrollbar */
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
 
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-
-        .animate-floatDelay {
-          animation: floatDelay 10s ease-in-out infinite;
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </section>

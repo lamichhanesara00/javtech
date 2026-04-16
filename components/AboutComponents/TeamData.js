@@ -49,7 +49,7 @@ const teamData = [
     name: "Barun Shrestha",
     role: "Full Stack Developer",
     category: "team",
-    img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&auto=format&fit=crop&q=60",
+    img: "team/new.webp",
     description:
       "Builds complex software ecosystems designed to expand effortlessly with your business. Balancing sophisticated database management with slick user interfaces.",
   },
@@ -77,7 +77,7 @@ const teamData = [
     name: "Bhumika Bista",
     role: "Frontend Developer",
     category: "team",
-    img: "https://images.unsplash.com/photo-1614204424926-196a80bf0be8?w=900&auto=format&fit=crop&q=60",
+    img: "",
     description:
       "Believes that the best design is both beautiful and intuitive. Crafts user-friendly interfaces that remove friction and ensure every interaction feels natural.",
   },
