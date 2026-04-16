@@ -415,7 +415,7 @@ export default function HowWeWork() {
               Ready to Transform Your Ideas?
             </h3>
             <p className="text-gray-600 mb-6 max-w-md">
-              Let's discuss your project and create something extraordinary
+              Let&apos;s discuss your project and create something extraordinary
               together
             </p>
             <Link href="/pricing" passHref>

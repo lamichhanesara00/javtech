@@ -59,7 +59,7 @@ export default function HeroSection() {
             transitionDelay: "200ms",
           }}
         >
-          <span className="text-white">Javtech's</span>
+          <span className="text-white">Javtech&apos;s</span>
           <br />
           <span className="text-white">Visual Archives</span>
         </h1>

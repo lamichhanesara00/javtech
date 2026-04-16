@@ -278,7 +278,7 @@ export function AllProjects() {
             </span>
           </div>
           <div className="max-w-2xl text-lg md:text-xl font-extralight text-gray-600">
-            Showcasing our collection of ideas that we've brought to life —
+            Showcasing our collection of ideas that we&apos;ve brought to life —
             crafted with strategy, creativity, and purpose.
           </div>
         </div>

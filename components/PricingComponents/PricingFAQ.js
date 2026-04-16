@@ -27,7 +27,7 @@ const faqData = [
       <div className="space-y-4">
         <p>
           We combine clean, modern design with solid engineering — your product
-          will look great and perform even better. We don't believe in
+          will look great and perform even better. We don&apos;t believe in
           one-size-fits-all solutions; every project gets a dedicated approach,
           transparent communication, and a team that treats your business as
           their own.
@@ -51,8 +51,8 @@ const faqData = [
           working hours to fit your time zone.
         </p>
         <p>
-          Clear communication and regular progress updates ensure you're always
-          in the loop, no matter where you are in the world.
+          Clear communication and regular progress updates ensure you&apos;re
+          always in the loop, no matter where you are in the world.
         </p>
       </div>
     ),
@@ -119,8 +119,8 @@ const faqData = [
           from day one.
         </p>
         <p>
-          A fast, accessible website isn't optional — it's the baseline for
-          everything we ship.
+          A fast, accessible website isn&apos;t optional — it&apos;s the
+          baseline for everything we ship.
         </p>
       </div>
     ),
@@ -136,8 +136,8 @@ const faqData = [
           depending on your needs.
         </p>
         <p>
-          We don't disappear after delivery — we're invested in your long-term
-          success.
+          We don&apos;t disappear after delivery — we&apos;re invested in your
+          long-term success.
         </p>
       </div>
     ),
@@ -164,13 +164,13 @@ const faqData = [
       <div className="space-y-4">
         <p>
           Getting started is simple — reach out through our contact page or
-          WhatsApp us directly. We'll schedule a free discovery call to
+          WhatsApp us directly. We&apos;ll schedule a free discovery call to
           understand your goals, answer your questions, and determine the best
           path forward.
         </p>
         <p>
-          From there we'll send a proposal and, once approved, kick off your
-          project with a clear plan and timeline.
+          From there we&apos;ll send a proposal and, once approved, kick off
+          your project with a clear plan and timeline.
         </p>
       </div>
     ),
