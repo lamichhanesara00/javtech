@@ -4,12 +4,9 @@ import { useRef } from "react";
 import { motion, useAnimationFrame } from "motion/react";
 
 const partners = [
-  { name: "HFH", logo: "/partners/logo.png" },
-  { name: "Community Homestay Network", logo: "/logo.png" },
-  { name: "Ultima Lifestyle", logo: "/partners/logo2.webp" },
-  { name: "BIA Institute", logo: "/logo.png" },
-  { name: "Government", logo: "/logo.png" },
-  { name: "Realme", logo: "/logo.png" },
+  { name: "HFH", logo: "/HFH.png" },
+  { name: "Government", logo: "/gsonic.jpeg" },
+  { name: "Realme", logo: "/abhiyan.jpeg" },
   { name: "Gadgetbyte", logo: "/logo.png" },
 ];
 

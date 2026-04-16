@@ -40,8 +40,8 @@ export function Footer() {
               src="/logo.png"
               alt="Logo"
               width={110}
-              height={34}
-              className="h-8 w-auto object-contain"
+              height={100}
+              className="h-8 w-auto object-contain bg-white"
               priority
             />
 
@@ -68,10 +68,10 @@ export function Footer() {
                 Phone
               </p>
               <a
-                href="tel:+9779801816685"
+                href="tel:+9779807128557"
                 className="text-sm transition-colors duration-200 hover:text-white/60"
               >
-                +977-981-******
+                +977-9807128557
               </a>
             </div>
 

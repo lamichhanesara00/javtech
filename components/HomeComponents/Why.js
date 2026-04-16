@@ -15,8 +15,14 @@ const cards = [
           We Drive Digital Innovation
         </h2>
 
-        <div className="flex justify-center md:justify-end">
-          <Image src="/logo.jpg" alt="logo" height={100} width={100} />
+        <div className="flex justify-center md:justify-end ">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            height={100}
+            width={100}
+            className="bg-white"
+          />
         </div>
 
         <div>

@@ -33,8 +33,8 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Call us",
-    value: "+977-9801816685",
-    href: "tel:+9779801816685",
+    value: "+977-9807128557",
+    href: "tel:+9779807128557",
   },
   {
     icon: MapPin,
@@ -48,7 +48,7 @@ const socials = [
   { label: "Facebook", href: "#" },
   { label: "Instagram", href: "#" },
   { label: "LinkedIn", href: "#" },
-  { label: "WhatsApp", href: "https://wa.me/9779801816685" },
+  { label: "WhatsApp", href: "https://wa.me/9779807128557" },
 ];
 
 const empty = {
@@ -261,7 +261,7 @@ export function ContactForm() {
                     {
                       name: "phone",
                       label: "Phone (optional)",
-                      placeholder: "+977 98XXXXXXXX",
+                      placeholder: "+977 9807128557",
                       type: "tel",
                       req: false,
                     },
@@ -324,7 +324,7 @@ export function ContactForm() {
                   </button>
 
                   <a
-                    href="https://wa.me/9779801816685"
+                    href="https://wa.me/9779807128557"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-[#e0e0e0] px-5 py-3.5 text-sm font-semibold text-[#333] transition-colors hover:border-[#cc0000] hover:text-[#cc0000]"
@@ -349,7 +349,7 @@ export function ContactForm() {
             respond fast.
           </p>
           <a
-            href="https://wa.me/9779801816685"
+            href="https://wa.me/9779807128557"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-[#cc0000] px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-80"
